@@ -68,7 +68,7 @@ where dea.continent is not null
 order by 2,3
 
 --USE CTE
-with PopvsVac (Continent, location, date, population, New_Vaccinations, RollingPeopleVaccinated)
+with PopvsVac (continent, location, date, population, New_Vaccinations, RollingPeopleVaccinated)
 as 
 (
 select dea.continent, dea.location, dea.date, dea.population,vac.new_vaccinations,
@@ -79,8 +79,9 @@ join PortfolioProject..CovidVaccinations vac
 	on dea.location = vac.location
 	and dea.date = vac.date
 where dea.continent is not null
+)
 --order by 2,3
-select *, (RollingPeopleVaccinated/population)*100 as VaccinationRate
+select * ,(RollingPeopleVaccinated/population)*100 as VaccinationRate
 from PopvsVac
 
 ---TEMP TABLE
